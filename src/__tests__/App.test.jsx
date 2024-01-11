@@ -4,6 +4,7 @@ import Welcome from "../components/Welcome";
 import AllTheBooks from "../components/AllTheBooks";
 import fantasy from "../data/fantasy.json";
 import CommentArea from "../components/CommentArea";
+import { waitFor } from "@testing-library/react";
 
 /* Welcome Component Rendering */
 
@@ -35,12 +36,11 @@ describe("All book-cards Test", () => {
 /*CommentArea Rendering*/
 
 describe("CommentArea Test", () => {
-	it("CommentArea renders correctly", () => {
+	it("Commentarea renders correctly", async () => {
 		render(<CommentArea />);
-		const loadingComponent =
-			screen.getByTestId(
-				"loading-spinner"
-			); /* ho aggiunto data-testid="loading-spinner" a Loading.jsx */
-		expect(loadingComponent).toBeInTheDocument();
+		await waitFor(() => {
+			const loadingComponents = screen.getAllByTestId("loading-spinner");
+			expect(loadingComponents).toHaveLength(1); // Assumi che ci sia solo un elemento con data-testid="loading-spinner"
+		});
 	});
 });
