@@ -1,11 +1,11 @@
 /* creato cartella __tests__ >>> con file App.test.jsx */
-import { fireEvent, render, screen } from "@testing-library/react";
-import App from "../App";
+import { render, screen } from "@testing-library/react";
 import Welcome from "../components/Welcome";
 import AllTheBooks from "../components/AllTheBooks";
 import fantasy from "../data/fantasy.json";
+import CommentArea from "../components/CommentArea";
 
-/* WELCOME COMPONENT */
+/* Welcome Component Rendering */
 
 describe("Welcome Component Test", () => {
 	/* qua raggruppo i test correlati al componente "Welcome" e descrivo brevemente a cosa mi riferisco */
@@ -16,9 +16,12 @@ describe("Welcome Component Test", () => {
 		const welcomeComponent = screen.getByText(/Benvenuti in EpiBooks!/i);
 		expect(welcomeComponent).toBeInTheDocument();
 	});
+});
 
-	/* n BOOTSTRAP CARDS = n LIBRI */
-	/* in "Components" vedo che ci sono 150 libri partendo da 0 a 149 */
+/* n bootstrap-cards = n books from .json file */
+/* in "Components" vedo che ci sono 150 libri partendo da 0 a 149 */
+
+describe("All book-cards Test", () => {
 	it("All books are correctly rendered with cards", () => {
 		render(<AllTheBooks />);
 		const allTheBookCards =
@@ -26,5 +29,18 @@ describe("Welcome Component Test", () => {
 				"book-card"
 			); /* ho aggiunto data-testid="book-card" a AllTheBooks.jsx */
 		expect(allTheBookCards).toHaveLength(fantasy.length);
+	});
+});
+
+/*CommentArea Rendering*/
+
+describe("CommentArea Test", () => {
+	it("CommentArea renders correctly", () => {
+		render(<CommentArea />);
+		const loadingComponent =
+			screen.getByTestId(
+				"loading-spinner"
+			); /* ho aggiunto data-testid="loading-spinner" a Loading.jsx */
+		expect(loadingComponent).toBeInTheDocument();
 	});
 });

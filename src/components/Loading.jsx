@@ -1,7 +1,12 @@
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from "react-bootstrap";
 
 const Loading = () => (
-  <Spinner animation="border" variant="success" className="mt-2" />
-)
+	<Spinner
+		data-testid="loading-spinner"
+		animation="border"
+		variant="success"
+		className="mt-2"
+	/>
+);
 
-export default Loading
+export default Loading;
